@@ -49,7 +49,7 @@ with gr.Blocks() as demo:
             top_k = gr.Slider(label='Top k', minimum=0, maximum=500, value=50)
             reset = gr.Button('Reset')
 
-    def answer(prompt, chat_history, temparature, max_length, top_p, top_k, req: gr.Request):
+    def answer(prompt, chat_history, temperature, max_length, top_p, top_k, req: gr.Request):
         server_url = None
         bot_message = None
         try:
@@ -64,11 +64,3 @@ with gr.Blocks() as demo:
     reset.click(lambda: None, None, chatbot, queue=False)
 
 app = gr.mount_gradio_app(app, demo, path='/')
-    
-if __name__ == 'main':
-    uvicorn.run(
-        app='main:app',
-        host='0.0.0.0',
-        port=8000,
-        reload=True
-    )
